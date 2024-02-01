@@ -1,0 +1,25 @@
+package com.example.demo.service;
+
+import com.example.demo.dto.BoardDTO;
+import com.example.demo.entity.Board;
+
+public interface BoardService {
+
+	void register(BoardDTO bdto);
+	
+	//BoardDTO 객체를 DB(Entity객체 = Board)에 저장
+	//Board <=> BoardDTO 변환
+	default Board convertDtoToEntity(BoardDTO bdto) {
+		return Board.builder()
+				.bno(bdto.getBno())
+				.title(bdto.getTitle())
+				.writer(bdto.getWriter())
+				.content(bdto.getContent())
+				.build();
+	}
+	
+	default BoardDTO convertEntityToDto(Board board) {
+		
+		
+	}
+}

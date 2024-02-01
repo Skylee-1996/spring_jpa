@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<th:block th:replace="~{layout :: setFragment(~{this::content})}">
+	<th:block th:fragment="content">
+	
+	
+	
+		<div class="container-md">
+			<h1>공지사항</h1>
+			<!--search  -->
+			<!-- 검색라인  -->
+<div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">title</th>
+						<th scope="col">writer</th>
+						<th scope="col">reg_date</th>
+						<th scope="col">readCount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<th:block th:each="bvo:${list}">
+						<tr>
+							<th scope="row">[[${bvo.bno }]]</th>
+							<td><a th:href="@{/board/detail(bno=${bvo.bno})}">[[${bvo.title}]]</a></td>
+							<td>[[${bvo.writer}]]</td>
+							<td>[[${bvo.regAt }]]</td>
+						</tr>
+					</th:block>
+				</tbody>
+			</table>
+			
+		<!-- 	<!-- 페이지네이션 라인  -->
+			<nav aria-label="Page navigation example">
+			  <ul class="pagination justify-content-center">
+			    <li th:if="${ph.prev}" class="page-item">
+			      <a class="page-link" th:href="@{/board/list(pageNo=${ph.startPage-1},qty=${ph.pgvo.qty})}" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li th:each="i: ${#numbers.sequence(ph.startPage,ph.endPage)}" th:classappend="${ph.pgvo.pageNo == i ? 'active' : ''}" class="page-item">
+			    <a class="page-link" th:href="@{/board/list(pageNo=${i},qty=${ph.pgvo.qty})}">[[${i}]]</a></li>
+			    
+			    <li th:if="${ph.next}" class="page-item">
+			      <a class="page-link" th:href="@{/board/list(pageNo=${ph.endPage+1},qty=${ph.pgvo.qty})}" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+			</div> -->
+			</th:block>
+			</th:block>
+<script th:inline="javascript">
+	const isDel = '[[${isDel}]]';
+	if(isDel == 1){
+		alert("삭제되었습니다");
+	}
+</script>
+</html>
+

@@ -1,0 +1,9 @@
+console.log("hi")
+document.getElementById('listBtn').addEventListener('click',()=>{
+	location.href="/board/list"; 
+})
+
+
+document.getElementById('modBtn').addEventListener('click',()=>{
+	document.getElementById('title').readOnly=false;
+})

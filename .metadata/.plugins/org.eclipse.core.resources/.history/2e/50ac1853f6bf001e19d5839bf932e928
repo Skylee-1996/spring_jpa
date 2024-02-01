@@ -1,0 +1,14 @@
+server.port=8090
+
+
+spring.datasource.url=jdbc:log4jdbc:mysql://localhost:3306/bootdb?characterEncoding=UTF-8&serverTimezone=UTC
+spring.datasource.username=mywebUser
+spring.datasource.password=mysql
+spring.datasource.driver-class-name=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+
+#JAP 설정
+spring.jpa.show-sql=true
+
+#테이블 자동생성 옵션
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.format_sql=true

@@ -1,0 +1,4 @@
+console.log("hi")
+document.getElementById('listBtn').addEventListener('click',()=>{
+	location.href"/board/list"; 
+})

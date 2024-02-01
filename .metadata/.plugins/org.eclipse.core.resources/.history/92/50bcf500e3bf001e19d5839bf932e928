@@ -1,0 +1,13 @@
+package com.example.demo.entity;
+
+public class Board {
+	//Entity : DB의 테이블 클래스
+	//DTO : 객체를 생성하는 클래스 ( =VO)
+	
+	//자주쓰는 코드들 : base class로 별도 관리
+	private Long bno;
+	private String title;
+	private String writer;
+	private String content;
+	
+}

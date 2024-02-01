@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout :: setFragment(~{this::content})}">
+   <th:block th:fragment="content">
+      <h2>Board Detail No. [[${bdto.bno}]]</h2>
+
+      <form action="/board/modify" method="post" id="modForm">
+
+         <input type="hidden" name="bno" th:value="${bdto.bno}">
+         <div class="my-3">
+            <label for="created">Created At : </label> <input type="text"
+               class="form-control" id="created" th:value="${bdto.regAt}"
+               readonly>
+         </div>
+         <div class="mb-3">
+            <label for="modified">Modified At : </label> <input type="text"
+               class="form-control" id="modified" th:value="${bdto.modAt}"
+               readonly>
+         </div>
+         <div class="mb-3">
+            <label for="title">Title : </label> <input type="text"
+               class="form-control" id="title" name="title"
+               th:value="${bdto.title}" readonly>
+         </div>
+         <div class="mb-3">
+            <label for="writer">Writer : </label> <input type="text"
+               class="form-control" id="writer" name="writer"
+               th:value="${bdto.writer}" readonly>
+         </div>
+         <div class="mb-3">
+            <label for="content">Content : </label>
+            <textarea name="content" id="content" cols="50" rows="5"
+               class="form-control" readonly>[[${bdto.content}]]
+                    </textarea>
+         </div>
+         <button type="button" id="listBtn" class="btn btn-outline-primary">List</button>
+         <button type="button" id="modBtn" class="btn btn-outline-warning">Modify</button>
+         <button type="button" id="delBtn" class="btn btn-outline-danger">Remove</button>
+      </form>
+      <form action="/board/remove" method="post" id="delForm"
+         style="display: none;">
+         <input type="hidden" name="bno" th:value="${bdto.bno}">
+      </form>
+     
+      
+      
+      
+      
+      
+   </th:block>
+</th:block>
+
+
+<script th:src="@{/js/boardDetail.js}"></script>
+</html>

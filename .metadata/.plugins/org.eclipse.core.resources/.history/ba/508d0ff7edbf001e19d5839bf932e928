@@ -1,0 +1,19 @@
+package com.example.demo.entity;
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+
+public class TimeBased {
+	//날짜 시간만 따로 빼서 관리하는 테이블
+	
+	@Column(name="reg_at")
+	private LocalDateTime regAt;
+	
+	@Column(name="mod_at")
+	private LocalDateTime modAt;
+	
+	
+	
+	
+}

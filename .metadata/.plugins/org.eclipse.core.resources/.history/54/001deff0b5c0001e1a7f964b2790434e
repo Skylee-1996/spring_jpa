@@ -1,0 +1,78 @@
+package com.example.demo.controller;
+
+import java.lang.ProcessBuilder.Redirect;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.example.demo.dto.BoardDTO;
+import com.example.demo.dto.PageVO;
+import com.example.demo.service.BoardService;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@RequiredArgsConstructor
+@RequestMapping("/board/*")
+@Slf4j
+@Controller
+public class BoardController {
+	private final BoardService bsv;
+	
+	@GetMapping("/register")
+	public void register() {}
+	
+	@PostMapping("/register")
+	public String register(BoardDTO bdto) {
+		log.info(">>>bdto >> {}", bdto);
+		Long bno = bsv.register(bdto);
+		log.info(">>>bno >> " + bno);
+		return "/index";
+	}
+	
+	@GetMapping("/list")
+	public void list(Model m) {
+	 Page<BoardDTO> list = bsv.getList();
+	 log.info("total Count : " + list.getTotalElements()); //전체 글 수
+	 log.info("total Page : " + list.getTotalPages()); //전체 글 수 => realEndPage
+	 log.info("page Number: " + list.getNumber()); //현재페이지
+	 log.info("page size : " + list.getSize()); //한페이지의 게시글 수 => qty
+	 log.info("page next : " + list.hasNext()); //다음페이지
+	 log.info("page prev : " + list.hasPrevious()); //이전페이지 
+	 
+	 log.info(">>>list>>>{}", list.getContent());
+	
+	 PageVO pvo = new PageVO(list, pageNo);
+	 m.addAttribute("pvo",pvo)
+	 m.addAttribute("list", list);
+	}
+	
+	@GetMapping("/detail")
+	public void detail(@RequestParam("bno") Long bno, Model m) {
+		BoardDTO bdto = bsv.getDetail(bno);
+		m.addAttribute("bdto",bdto);
+	}
+	
+	@PostMapping("/modify")
+	public String modify(BoardDTO bdto, RedirectAttributes re) {
+		
+	 Long bno  = bsv.modify(bdto);
+		
+		return "redirect:/board/detail?bno="+bno;
+	}
+	
+	@PostMapping("/remove")
+	public String remove(@RequestParam("bno") Long bno) {
+		
+		bsv.remove(bno);
+		return "redirect:/board/list";
+	}
+	
+}
